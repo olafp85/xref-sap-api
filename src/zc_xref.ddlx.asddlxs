@@ -1,0 +1,62 @@
+@Metadata.layer: #CUSTOMER
+@UI: { headerInfo: { typeName: 'Xref',
+                     typeNamePlural: 'Xrefs',
+                     title: { type: #STANDARD,
+                              value: 'ID' } } }
+
+annotate entity ZC_XREF with
+{
+  @UI.facet: [ { id:            'Xref',
+                 purpose:       #STANDARD,
+                 type:          #IDENTIFICATION_REFERENCE,
+                 label:         'Cross ref',
+                 position:      10 },
+               { id:            'Unit',
+                 purpose:       #STANDARD,
+                 type:          #LINEITEM_REFERENCE,
+                 label:         'Unit',
+                 position:      20,
+                 targetElement: '_Unit'}]
+
+  @UI: { lineItem:       [ { position: 10,
+                             importance: #HIGH } ],
+         identification: [ { position: 10 } ],
+         selectionField: [ { position: 10 } ] }
+  ID;
+
+  @UI: { lineItem:       [ { position: 20,
+                           importance: #HIGH } ],
+       identification: [ { position: 20 } ],
+       selectionField: [ { position: 20 } ] }
+  Type;
+
+  @UI: { lineItem:       [ { position: 30,
+                           importance: #HIGH } ],
+       identification: [ { position: 30 } ],
+       selectionField: [ { position: 30 } ] }
+  Name;
+
+//  @UI.lineItem: [{ position: 40 }]
+//  Component;
+//
+//  @UI.lineItem: [{ position: 50 }]
+//  Unit;
+
+  @UI.lineItem: [{ position: 60 }]
+  DepthWhereUsed;
+
+  @UI.lineItem: [{ position: 70 }]
+  DepthCalls;
+
+  @UI.lineItem: [{ position: 80 }]
+  IncludeSapObjects;
+
+  @UI.lineItem: [{ position: 90 }]
+  SapSystem;
+
+  @UI.lineItem: [{ position: 100 }]
+  SapRelease;
+
+  @UI.lineItem: [{ position: 110 }]
+  AnalyzedOn;
+}

@@ -1,0 +1,72 @@
+managed implementation in class ZBP_XREF unique;
+strict ( 2 );
+
+/* Root */
+define behavior for ZR_Xref alias Xrefs
+persistent table zxref
+lock master
+etag master ChangedAt
+authorization master ( global )
+early numbering
+
+{
+  field ( readonly )
+  ID,
+  CreatedAt,
+  CreatedBy,
+  ChangedAt;
+
+  association _Unit { create ( features : instance ); }
+
+  create;
+  update;
+  delete;
+
+  mapping for zxref
+    {
+      ID                = id;
+      Type              = type;
+      Name              = name;
+      Component         = component;
+      Unit              = unit;
+      DepthWhereUsed    = depth_where_used;
+      DepthCalls        = depth_calls;
+      IncludeSapObjects = include_sap_objects;
+      SapSystem         = sap_system;
+      SapRelease        = sap_release;
+      AnalyzedOn        = analyzed_on;
+      CreatedAt         = created_at;
+      CreatedBy         = created_by;
+      ChangedAt         = changed_at;
+    }
+}
+
+/* Child */
+define behavior for ZI_XrefUnit alias Unit
+persistent table zxref_unit
+lock dependent by _Xref
+etag master ChangedAt
+authorization dependent by _Xref
+{
+  field ( readonly, numbering : managed )
+  InternalID;
+
+  field ( readonly )
+  XrefID;
+
+  update;
+  delete;
+
+  association _Xref;
+
+  mapping for zxref_unit
+    {
+      InternalID = internal_id;
+      XrefID     = xref_id;
+      ID         = id;
+      Sap        = sap;
+      SapPackage = sap_package;
+      ChangedAt  = changed_at;
+    }
+
+}

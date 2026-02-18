@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service definition for ZC_XREF'
+define service ZAPI_XREF_O4 {
+  expose ZC_XREF      as Xrefs;
+  expose ZC_XREF_UNIT as Unit;
+}

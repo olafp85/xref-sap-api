@@ -1,0 +1,19 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_XREF
+use etag
+{
+  use create;
+  use update;
+  use delete;
+  use association _Unit { create; }
+}
+
+define behavior for ZC_XREF_UNIT
+use etag
+{
+  use update;
+  use delete;
+  use association _Xref;
+}
